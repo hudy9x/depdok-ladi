@@ -2,8 +2,7 @@
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import FeatureStrip from "./components/FeatureStrip";
-import AppDemo from "./components/AppDemo";
-import Features from "./components/Features";
+import FollowJourney from "./components/FollowJourney";
 
 export default function Home() {
   return (
@@ -12,8 +11,7 @@ export default function Home() {
       <main className="flex flex-1 flex-col items-center">
         <Hero />
         <FeatureStrip />
-        <AppDemo />
-        <Features />
+        <FollowJourney />
       </main>
       <footer className="w-full py-8 text-center text-sm text-gray-400">
         <p>&copy; {new Date().getFullYear()} DepDok. All rights reserved.</p>

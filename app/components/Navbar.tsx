@@ -19,10 +19,10 @@ export default function Navbar() {
         </span>
       </div>
       <Link
-        href="https://github.com/depdok/depdok" // Placeholder URL
+        href="https://x.com/hudy09" // Placeholder URL
         className="rounded-full border border-gray-200 px-4 py-1.5 text-sm font-medium text-gray-700 transition-colors hover:border-gray-300 hover:bg-gray-50"
       >
-        Follow on GitHub
+        Follow on X
       </Link>
     </nav>
   );
