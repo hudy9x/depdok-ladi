@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { dmSerif } from "../utils/fonts";
 import { useEffect, useState } from "react";
+import { event } from "../utils/gtag";
 
 export default function Hero() {
   const [downloadUrl, setDownloadUrl] = useState("https://github.com/hudy9x/depdok-ladi/releases/download/v0.0.1/Depdok_0.0.1_aarch64.dmg");
@@ -22,6 +23,15 @@ export default function Hero() {
       setPlatform("macOS");
     }
   }, []);
+
+  const handleDownloadClick = () => {
+    console.log('Sending GA event:', { action: 'download', category: 'App', label: platform });
+    event({
+      action: "download",
+      category: "App",
+      label: platform,
+    });
+  };
 
   return (
     <section className="flex flex-col items-center justify-center px-4 pt-16 text-center sm:pt-24 lg:px-8">
@@ -49,6 +59,7 @@ export default function Hero() {
       <div className="mt-10 flex flex-col items-center gap-x-6 gap-y-4 sm:flex-row">
         <Link
           href={downloadUrl}
+          onClick={handleDownloadClick}
           className="rounded-full bg-black px-8 py-3.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
         >
           Download for {platform} (Beta)
