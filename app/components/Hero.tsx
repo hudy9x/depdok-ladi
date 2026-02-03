@@ -1,11 +1,33 @@
+"use client";
 
 import Image from "next/image";
 import Link from "next/link";
 import { dmSerif } from "../utils/fonts";
+import { useEffect, useState } from "react";
 
 export default function Hero() {
+  const [downloadUrl, setDownloadUrl] = useState("https://github.com/hudy9x/depdok-ladi/releases/download/v0.0.1/Depdok_0.0.1_aarch64.dmg");
+  const [platform, setPlatform] = useState("macOS");
+
+  useEffect(() => {
+    const userAgent = window.navigator.userAgent.toLowerCase();
+    const isMac = /mac|iphone|ipad|ipod/.test(userAgent);
+    const isWindows = /win/.test(userAgent);
+
+    if (isWindows) {
+      setDownloadUrl("https://github.com/hudy9x/depdok-ladi/releases/download/v0.0.1/Depdok_0.0.1_x64_en-US.msi");
+      setPlatform("Windows");
+    } else if (isMac) {
+      setDownloadUrl("https://github.com/hudy9x/depdok-ladi/releases/download/v0.0.1/Depdok_0.0.1_aarch64.dmg");
+      setPlatform("macOS");
+    }
+  }, []);
+
   return (
     <section className="flex flex-col items-center justify-center px-4 pt-16 text-center sm:pt-24 lg:px-8">
+      <div className="mb-8 inline-block rounded-full border border-orange-200 bg-orange-100 px-3 py-1 text-xs font-medium text-orange-600">
+        v0.0.1
+      </div>
       <div
         className="relative mb-8 h-24 w-24 overflow-hidden rounded-2xl sm:h-32 sm:w-32"
         style={{ filter: "drop-shadow(0 20px 40px rgba(0, 0, 0, 0.15))" }}
@@ -26,10 +48,10 @@ export default function Hero() {
       </p>
       <div className="mt-10 flex flex-col items-center gap-x-6 gap-y-4 sm:flex-row">
         <Link
-          href="#"
+          href={downloadUrl}
           className="rounded-full bg-black px-8 py-3.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
         >
-          Download for Desktop
+          Download for {platform}
         </Link>
         <Link
           href="https://x.com/hudy09"
