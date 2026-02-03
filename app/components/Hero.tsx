@@ -51,7 +51,7 @@ export default function Hero() {
           href={downloadUrl}
           className="rounded-full bg-black px-8 py-3.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
         >
-          Download for {platform}
+          Download for {platform} (Beta)
         </Link>
         <Link
           href="https://x.com/hudy09"
