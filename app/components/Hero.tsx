@@ -26,7 +26,7 @@ export default function Hero() {
   return (
     <section className="flex flex-col items-center justify-center px-4 pt-16 text-center sm:pt-24 lg:px-8">
       <div className="mb-8 inline-block rounded-full border border-orange-200 bg-orange-100 px-3 py-1 text-xs font-medium text-orange-600">
-        v0.0.1
+        v0.0.1-beta
       </div>
       <div
         className="relative mb-8 h-24 w-24 overflow-hidden rounded-2xl sm:h-32 sm:w-32"
@@ -40,10 +40,10 @@ export default function Hero() {
           priority
         />
       </div>
-      <h1 className={`max-w-4xl text-4xl leading-16 font-bold tracking-tight text-black sm:text-5xl md:text-6xl ${dmSerif.className}`}>
+      <h1 className={`max-w-4xl text-3xl leading-10 sm:leading-16 font-bold tracking-tight text-black sm:text-5xl md:text-6xl ${dmSerif.className}`}>
         Lightweight, offline-first<br /> editor for developers.
       </h1>
-      <p className="mt-6 max-w-2xl text-lg leading-8 text-gray-500">
+      <p className="mt-6 max-w-2xl text-base sm:text-lg leading-8 text-gray-500">
         A desktop editor for developers who value privacy. Write markdown with live preview, create Mermaid diagrams, and organize tasks with auto-kanban boards. Everything works offline—no cloud, no internet required. Your files, your way.
       </p>
       <div className="mt-10 flex flex-col items-center gap-x-6 gap-y-4 sm:flex-row">

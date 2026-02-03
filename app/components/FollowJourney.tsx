@@ -8,7 +8,7 @@ export default function FollowJourney() {
       <div className="mx-auto max-w-4xl overflow-hidden rounded-3xl bg-black">
         <div className="px-6 py-24 sm:py-32 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className={`${dmSerif.className} text-4xl font-semibold tracking-tight text-balance text-white sm:text-5xl`}>
+            <h2 className={`${dmSerif.className} text-3xl font-semibold tracking-tight text-balance text-white sm:text-5xl`}>
               Follow the Journey
             </h2>
             <p className="mx-auto mt-6 max-w-xl text-lg/8 text-pretty text-gray-300">
