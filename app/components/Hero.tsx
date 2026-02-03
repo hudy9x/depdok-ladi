@@ -15,7 +15,7 @@ export default function Hero() {
     const isWindows = /win/.test(userAgent);
 
     if (isWindows) {
-      setDownloadUrl("https://github.com/hudy9x/depdok-ladi/releases/download/v0.0.1/Depdok_0.0.1_x64_en-US.msi");
+      setDownloadUrl("https://github.com/hudy9x/depdok-ladi/releases/download/v0.0.1/Depdok_0.0.1_x64-setup.exe");
       setPlatform("Windows");
     } else if (isMac) {
       setDownloadUrl("https://github.com/hudy9x/depdok-ladi/releases/download/v0.0.1/Depdok_0.0.1_aarch64.dmg");
