@@ -7,21 +7,46 @@ import { useEffect, useState } from "react";
 import { event } from "../utils/gtag";
 
 export default function Hero() {
-  const [downloadUrl, setDownloadUrl] = useState("https://github.com/hudy9x/depdok-ladi/releases/download/v0.0.1/Depdok_0.0.1_aarch64.dmg");
+  const [downloadUrl, setDownloadUrl] = useState("https://github.com/hudy9x/depdok-ladi/releases/latest");
   const [platform, setPlatform] = useState("macOS");
+  const [version, setVersion] = useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("depdok-version") || "v0.0.1";
+    }
+    return "v0.0.1";
+  });
 
   useEffect(() => {
-    const userAgent = window.navigator.userAgent.toLowerCase();
-    const isMac = /mac|iphone|ipad|ipod/.test(userAgent);
-    const isWindows = /win/.test(userAgent);
+    const fetchLatestVersion = async () => {
+      try {
+        const response = await fetch("https://api.github.com/repos/hudy9x/depdok-ladi/releases/latest");
+        const data = await response.json();
+        const latestVersion = data.tag_name; // e.g., "v0.0.2"
 
-    if (isWindows) {
-      setDownloadUrl("https://github.com/hudy9x/depdok-ladi/releases/download/v0.0.1/Depdok_0.0.1_x64-setup.exe");
-      setPlatform("Windows");
-    } else if (isMac) {
-      setDownloadUrl("https://github.com/hudy9x/depdok-ladi/releases/download/v0.0.1/Depdok_0.0.1_aarch64.dmg");
-      setPlatform("macOS");
-    }
+        setVersion(latestVersion);
+        localStorage.setItem("depdok-version", latestVersion);
+
+        const userAgent = window.navigator.userAgent.toLowerCase();
+        const isMac = /mac|iphone|ipad|ipod/.test(userAgent);
+        const isWindows = /win/.test(userAgent);
+
+        // Extract version number without 'v' prefix for file names
+        const versionNumber = latestVersion.replace('v', '');
+
+        if (isWindows) {
+          setDownloadUrl(`https://github.com/hudy9x/depdok-ladi/releases/download/${latestVersion}/Depdok_${versionNumber}_x64-setup.exe`);
+          setPlatform("Windows");
+        } else if (isMac) {
+          setDownloadUrl(`https://github.com/hudy9x/depdok-ladi/releases/download/${latestVersion}/Depdok_${versionNumber}_aarch64.dmg`);
+          setPlatform("macOS");
+        }
+      } catch (error) {
+        console.error("Failed to fetch latest version:", error);
+        // Fallback to default values already set in state
+      }
+    };
+
+    fetchLatestVersion();
   }, []);
 
   const handleDownloadClick = () => {
@@ -36,7 +61,7 @@ export default function Hero() {
   return (
     <section className="flex flex-col items-center justify-center px-4 pt-16 text-center sm:pt-24 lg:px-8">
       <div className="mb-8 inline-block rounded-full border border-orange-200 bg-orange-100 px-3 py-1 text-xs font-medium text-orange-600">
-        v0.0.1-beta
+        {version}
       </div>
       <div
         className="relative mb-8 h-24 w-24 overflow-hidden rounded-2xl sm:h-32 sm:w-32"
