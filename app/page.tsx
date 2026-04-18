@@ -1,7 +1,5 @@
-
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-import FeatureStrip from "./components/FeatureStrip";
 import FollowJourney from "./components/FollowJourney";
 
 export default function Home() {
@@ -10,7 +8,6 @@ export default function Home() {
       <Navbar />
       <main className="flex flex-1 flex-col items-center">
         <Hero />
-        <FeatureStrip />
         <FollowJourney />
       </main>
       <footer className="w-full py-8 text-center text-sm text-gray-400">
