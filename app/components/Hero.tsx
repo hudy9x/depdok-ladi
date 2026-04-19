@@ -4,12 +4,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { dmSerif } from "../utils/fonts";
 import { useEffect, useState } from "react";
-import Carousel from "./Carousel/Carousel";
+import Carousel, { CarouselFeature } from "./Carousel/Carousel";
 import { event } from "../utils/gtag";
 
 export default function Hero() {
   const [downloadUrl, setDownloadUrl] = useState("https://github.com/hudy9x/depdok-ladi/releases/latest");
   const [platform, setPlatform] = useState("macOS");
+  const [activeFeature, setActiveFeature] = useState<CarouselFeature | null>(null);
+  const [textVisible, setTextVisible] = useState(true);
   const [version, setVersion] = useState(() => {
     if (typeof window !== "undefined") {
       return localStorage.getItem("depdok-version") || "v0.0.1";
@@ -50,6 +52,14 @@ export default function Hero() {
     fetchLatestVersion();
   }, []);
 
+  const handleFeatureChange = (feature: CarouselFeature) => {
+    setTextVisible(false);
+    setTimeout(() => {
+      setActiveFeature(feature);
+      setTextVisible(true);
+    }, 200);
+  };
+
   const handleDownloadClick = () => {
     console.log('Sending GA event:', { action: 'download', category: 'App', label: platform });
     event({
@@ -77,15 +87,15 @@ export default function Hero() {
         />
       </div>
 
-      <h1 className={`max-w-4xl text-3xl leading-10 sm:leading-16 font-bold tracking-tight text-black sm:text-5xl ${dmSerif.className}`}>
-        Lightweight, offline-first<br /> editor for developers.
+      <h1 className={`max-w-4xl text-3xl leading-10 sm:leading-16 font-bold tracking-tight text-black sm:text-5xl ${dmSerif.className} transition-opacity duration-200 whitespace-pre-line`} style={{ opacity: textVisible ? 1 : 0 }}>
+        {activeFeature ? activeFeature.heading : 'Lightweight, offline-first\neditor for developers.'}
       </h1>
-      <p className="mt-6 max-w-2xl text-base sm:text-lg leading-8 text-gray-500">
-        A desktop editor for developers who value privacy. Write markdown with live preview, create Mermaid diagrams, and organize tasks with auto-kanban boards. Everything works offline—no cloud, no internet required. Your files, your way.
+      <p className="mt-6 max-w-2xl text-base sm:text-lg leading-8 text-gray-500 transition-opacity duration-200" style={{ opacity: textVisible ? 1 : 0 }}>
+        {activeFeature ? activeFeature.subheading : 'A desktop editor for developers who value privacy. Write markdown with live preview, create Mermaid diagrams, and organize tasks with auto-kanban boards. Everything works offline—no cloud, no internet required. Your files, your way.'}
       </p>
 
       <div className="w-full flex justify-center mb-12">
-        <Carousel />
+        <Carousel onChange={handleFeatureChange} />
       </div>
 
 
