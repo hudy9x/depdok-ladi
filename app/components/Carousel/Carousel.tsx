@@ -108,7 +108,7 @@ export default function Carousel({ onChange, autoSwitchSeconds = 8 }: CarouselPr
         </button>
 
         <div className="flex flex-1 overflow-x-auto justify-center">
-          <div className="flex bg-[#F9F5F0] p-1.5 rounded-full border border-[#EBE4D5] shadow-inner items-center flex-nowrap w-max space-x-1">
+          <div className="flex bg-[#F9F5F0] p-1.5 rounded-full items-center flex-nowrap w-max space-x-1">
             {FEATURES.map((feature, index) => {
               const isActive = index === activeIndex;
               return (
@@ -116,7 +116,7 @@ export default function Carousel({ onChange, autoSwitchSeconds = 8 }: CarouselPr
                   key={feature.id}
                   onClick={() => goTo(index)}
                   className={`flex shrink-0 items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition-all duration-300 ${isActive
-                    ? "bg-white text-[#2B6CB0] shadow-sm ring-1 ring-gray-200"
+                    ? "bg-white text-primary shadow-sm ring-1 ring-gray-200"
                     : "text-gray-500 hover:text-gray-900"
                     }`}
                 >

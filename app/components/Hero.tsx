@@ -95,7 +95,7 @@ export default function Hero() {
       </p>
 
       <div className="w-full flex justify-center mb-12">
-        <Carousel onChange={handleFeatureChange} />
+        <Carousel autoSwitchSeconds={0} onChange={handleFeatureChange} />
       </div>
 
 
