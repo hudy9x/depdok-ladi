@@ -70,6 +70,19 @@ interface CarouselProps {
   autoSwitchSeconds?: number;
 }
 
+const getFeatureActiveColor = (id: string) => {
+  switch (id) {
+    case 'markdown': return '#111827'; // gray-900
+    case 'mermaid': return '#a855f7';  // purple-500
+    case 'plantuml': return '#22c55e'; // green-500
+    case 'logger': return '#ef4444';   // red-500
+    case 'excalidraw': return '#f97316'; // orange-500
+    case 'todo': return '#3b82f6';     // blue-500
+    case 'diff': return '#ec4899';     // pink-500
+    default: return '#111827';
+  }
+};
+
 export default function Carousel({ onChange, autoSwitchSeconds = 8 }: CarouselProps) {
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -116,9 +129,10 @@ export default function Carousel({ onChange, autoSwitchSeconds = 8 }: CarouselPr
                   key={feature.id}
                   onClick={() => goTo(index)}
                   className={`flex shrink-0 items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition-all duration-300 ${isActive
-                    ? "bg-white text-primary shadow-sm ring-1 ring-gray-200"
+                    ? "bg-white shadow-sm ring-1 ring-gray-200"
                     : "text-gray-500 hover:text-gray-900"
                     }`}
+                  style={isActive ? { color: getFeatureActiveColor(feature.id) } : {}}
                 >
                   {getFeatureIcon(feature.id, "w-4 h-4")}
                   {feature.label}
